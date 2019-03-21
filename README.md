@@ -8,10 +8,13 @@
 
 ## Speech to text
 
-```pip install SpeechRecognition```
-```brew install portaudio```
-```pip install pyaudio```
+* ```pip install SpeechRecognition```
+* ```brew install portaudio```
+* ```pip install pyaudio```
 
 ### Trial on terminal
-```python -m speech_recognition```
+* ```python -m speech_recognition```
 
+# Reference
+* Speech to text for Japanese
+   * https://qiita.com/hamham/items/9b553d0759a2319ea211
