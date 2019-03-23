@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import queue
 import subprocess
 import threading
@@ -17,7 +19,6 @@ class AsynchronousFileReader(threading.Thread):
         self._fd = fd
         self._queue = q
         self.stop_event = threading.Event()
-        # self.setDaemon(True)
 
     def run(self):
         '''The body of the tread: read lines and put them on the queue.'''
