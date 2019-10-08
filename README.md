@@ -1,6 +1,17 @@
 # vui-automation-playground
 
-# Development
+# Development (Linux)
+
+## Text to speech
+
+```
+$pip install pyttsx3
+$sudo apt-get update && sudo apt-get install espeak
+$python text_to_speech.py
+```
+
+
+# Development(Mac)
 
 ## Text to speech
 
