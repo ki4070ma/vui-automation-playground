@@ -27,5 +27,5 @@ def speech_to_text():
 if __name__ == '__main__':
     text_to_speech('Good morning')
     text_to_speech('How are you?')
-    text_to_speech('OK Google 明日の天気を教えて')
+#    text_to_speech('OK Google 明日の天気を教えて')
 

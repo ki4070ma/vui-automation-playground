@@ -10,6 +10,13 @@ $sudo apt-get update && sudo apt-get install espeak
 $python text_to_speech.py
 ```
 
+## Text to speech 2
+
+```
+$pip install gTTS
+$sudo apt install mpg321
+$python text_to_speech_gtts.py
+```
 
 # Development(Mac)
 
