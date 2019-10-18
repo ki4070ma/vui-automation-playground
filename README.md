@@ -1,5 +1,11 @@
 # vui-automation-playground
 
+# How to use script
+
+```bash
+$python run_script.py "Ok google, hello" 'en' 'Displayed com.google.android.googlequicksearchbox'
+```
+
 # Development (Linux)
 
 ## Text to speech

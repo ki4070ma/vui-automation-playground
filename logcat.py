@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import queue
-import subprocess
+import subprocess as sp
 import threading
 
 
@@ -35,23 +35,30 @@ class AsynchronousFileReader(threading.Thread):
         self.stop_event.set()
         self.join()
 
+def wait_for_word_in_log(word):
+    sp.run(["adb", "logcat", "-c"])
 
-# You'll need to add any command line arguments here.
-process = subprocess.Popen(["adb", "logcat"], stdout=subprocess.PIPE)
+    # You'll need to add any command line arguments here.
+    process = sp.Popen(["adb", "logcat"], stdout=sp.PIPE)
 
-# Launch the asynchronous readers of the process' stdout.
-stdout_queue = queue.Queue()
-stdout_reader = AsynchronousFileReader(process.stdout, stdout_queue)
-stdout_reader.start()
+    # Launch the asynchronous readers of the process' stdout.
+    stdout_queue = queue.Queue()
+    stdout_reader = AsynchronousFileReader(process.stdout, stdout_queue)
+    stdout_reader.start()
 
-# Check the queues if we received some output (until there is nothing more to get).
-break_flg = False
-while not stdout_reader.eof() and break_flg is False:
-    while not stdout_queue.empty():
-        line = str(stdout_queue.get())
-        if 'HOGE' in line:
-            print(line)
-            break_flg = True
-            break
-print('Done')
-stdout_reader.stop()
+    # Check the queues if we received some output (until there is nothing more to get).
+    break_flg = False
+    print('waiting...')
+    while not stdout_reader.eof() and break_flg is False:
+        while not stdout_queue.empty():
+            line = str(stdout_queue.get())
+            if word in line:
+                print(line)
+                break_flg = True
+                break
+    print('Done')
+    stdout_reader.stop()
+
+if __name__ == '__main__':
+    word = "ActivityManager: Displayed com.google.android.googlequicksearchbox/com.google.android.apps.gsa.staticplugins.opa.OpaActivity"
+    wait_for_word_in_log(word)
