@@ -15,7 +15,7 @@ def text_to_speech(text, lang):
 if __name__ == '__main__':
   # text_to_speech('OK Google, Good morning', 'en')
   # text_to_speech('OK Google, こんにちは', 'ja')
-  # text_to_speech('OK Google', 'ja')
+  text_to_speech('OK Google', 'en')
   # text_to_speech('オーケー  グーグル', 'ja')
-  text_to_speech('明日の天気を教えて', 'ja')
+  # text_to_speech('明日の天気を教えて', 'ja')
   # text_to_speech('OK Google, 明日の天気を教えて', 'ja')
