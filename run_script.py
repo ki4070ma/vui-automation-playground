@@ -1,14 +1,8 @@
 #!/usr/bin/env python
 
-import os
-
-from text_to_speech_gtts import text_to_speech
+from voice import Voice
 from logcat import Logcat
 
-def say_ok_google_mori(file='ok_google_mori.mp3'):
-    if not os.path.exists(file):
-        raise FileExistsError("{} doesn't exist.".format(file))
-    os.system("mpg321 {}".format(file))
 
 if __name__ ==  '__main__':
     # Usage: $ python run_script.py "hello" 'en' 'Displayed com.google.android.googlequicksearchbox'
@@ -24,8 +18,9 @@ if __name__ ==  '__main__':
     args = parser.parse_args()
 
     logcat = Logcat()
+    voice = Voice()
 
     logcat.log_clear()
-    say_ok_google_mori()
-    text_to_speech(args.sentence, args.lang)
+    voice.say_ok_google_mori()
+    voice.text_to_speech(args.sentence, args.lang)
     logcat.wait_for_word_in_log(args.word_to_wait, log_clear=False)
