@@ -37,7 +37,7 @@ class Logcat(object):
 
 class AsynchronousFileReader(threading.Thread):
     '''
-    Helper class to implement asynchronous reading of a file
+    Helper class to implement asynchronous reading of a files
     in a separate thread. Pushes read lines on a queue to
     be consumed in another thread.
     '''

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from voice import Voice
-from logcat import Logcat
+from vui_automation.voice import Voice
+from vui_automation.logcat import Logcat
 
 
 if __name__ ==  '__main__':
