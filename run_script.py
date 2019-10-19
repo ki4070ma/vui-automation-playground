@@ -3,7 +3,7 @@
 import os
 
 from text_to_speech_gtts import text_to_speech
-from logcat import wait_for_word_in_log
+from logcat import Logcat
 
 def say_ok_google_mori(file='ok_google_mori.mp3'):
     if not os.path.exists(file):
@@ -11,7 +11,7 @@ def say_ok_google_mori(file='ok_google_mori.mp3'):
     os.system("mpg321 {}".format(file))
 
 if __name__ ==  '__main__':
-    # Usage: $ python test.py input.txt output.txt --arg3 11111 -a 22222
+    # Usage: $ python run_script.py "hello" 'en' 'Displayed com.google.android.googlequicksearchbox'
 
     import argparse
 
@@ -23,6 +23,9 @@ if __name__ ==  '__main__':
 
     args = parser.parse_args()
 
+    logcat = Logcat()
+
+    logcat.log_clear()
     say_ok_google_mori()
     text_to_speech(args.sentence, args.lang)
-    wait_for_word_in_log(args.word_to_wait)
+    logcat.wait_for_word_in_log(args.word_to_wait, log_clear=False)
