@@ -7,7 +7,7 @@ import os
 
 class Voice(object):
 
-  def text_to_speech(self, text, lang):
+  def say(self, text, lang):
     '''Speech text from mic
 
     :param text: Text to speach
@@ -33,7 +33,7 @@ class Voice(object):
     engine.say(text)
     engine.runAndWait()
 
-  def say_ok_google_mori(self, file='files/ok_google_mori.mp3'):
+  def say_ok_google(self, file='files/ok_google_mori.mp3'):
     '''
 
     :param file:
@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
   # voice.text_to_speech('OK Google, Good morning', 'en')
   # voice.text_to_speech('OK Google, こんにちは', 'ja')
-  voice.text_to_speech('OK Google', 'en')
+  voice.say('OK Google', 'en')
   # voice.text_to_speech('オーケー  グーグル', 'ja')
   # voice.text_to_speech('明日の天気を教えて', 'ja')
   # voice.text_to_speech('OK Google, 明日の天気を教えて', 'ja')

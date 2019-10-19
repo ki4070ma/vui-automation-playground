@@ -3,13 +3,14 @@
 import queue
 import subprocess as sp
 import threading
+import time
 
 class Logcat(object):
 
     def log_clear(self):
         sp.run(["adb", "logcat", "-c"])
 
-    def wait_for_word_in_log(self, word, log_clear=True):
+    def wait_for_word_in_log(self, word, timeout=10, log_clear=True):
         if log_clear:
             self.log_clear()
 
@@ -24,14 +25,18 @@ class Logcat(object):
         # Check the queues if we received some output (until there is nothing more to get).
         break_flg = False
         print('waiting...')
-        while not stdout_reader.eof() and break_flg is False:
+        start = time.time()
+        while not stdout_reader.eof() and break_flg is False and time.time() - start < 10:
             while not stdout_queue.empty():
                 line = str(stdout_queue.get())
                 if word in line:
                     print(line)
                     break_flg = True
                     break
-        print('Done')
+        if break_flg:
+            print('***Found: {}'.format(word))
+        else:
+            print('***Not found: {}. Timeout: {}sec.'.format(word, timeout))
         stdout_reader.stop()
 
 

@@ -21,6 +21,6 @@ if __name__ ==  '__main__':
     voice = Voice()
 
     logcat.log_clear()
-    voice.say_ok_google_mori()
-    voice.text_to_speech(args.sentence, args.lang)
+    voice.say_ok_google()
+    voice.say(args.sentence, args.lang)
     logcat.wait_for_word_in_log(args.word_to_wait, log_clear=False)
