@@ -56,6 +56,10 @@ class BaseTest(unittest.TestCase):
                 for line in lines['message'].split('¥n'):
                     fd.write(line + '\n')
 
+        # Exit from google assistant
+        for _ in range(5):
+            self.driver.back()
+
         # end the session
         self.driver.quit()
 

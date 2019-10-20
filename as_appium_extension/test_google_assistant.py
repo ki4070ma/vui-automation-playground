@@ -12,16 +12,8 @@ GASSISTANT_PKG = 'com.google.android.googlequicksearchbox'
 
 class GoogleAssistantTest(BaseTest):
 
-    def test_whats_the_weather(self) -> None:
-
-        # ***Ok, Google
-        self.voice.say_ok_google()
-
-        el = wait_for_element(
-            self.driver,
-            MobileBy.ID,
-            GASSISTANT_PKG + ':id/chatui_text')
-        assert el.text == 'Hi, how can I help?'
+    def test_whats_the_weather(self):
+        self._ok_google()
 
         # ***Ask weather
         word = "what's the weather tomorrow"
@@ -34,3 +26,24 @@ class GoogleAssistantTest(BaseTest):
         assert el.text == word
 
         time.sleep(3)
+
+    def test_open_music(self):
+        self._ok_google()
+
+        # ***Ask weather
+        word = "Launch music"
+        self.voice.say(word, 'en')
+
+        time.sleep(3)
+
+        assert self.driver.current_package == 'com.miui.player'
+
+    def _ok_google(self):
+        # ***Ok, Google
+        self.voice.say_ok_google()
+
+        el = wait_for_element(
+            self.driver,
+            MobileBy.ID,
+            GASSISTANT_PKG + ':id/chatui_text')
+        assert el.text == 'Hi, how can I help?'
