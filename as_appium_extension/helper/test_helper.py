@@ -3,12 +3,26 @@
 
 import os
 import unittest
+from typing import Any
 
 from appium import webdriver
-from util import GlobalVar
 
+
+class GlobalVar(object):
+
+    log_root_dir = ''
+    log_dir = ''
+
+    _instance = None
+
+    def __new__(cls, *args: Any, **kwargs: Any) -> Any:
+        if cls._instance is None:
+            cls._instance = object.__new__(cls)
+        return cls._instance
 
 # Returns abs path relative to this file and not cwd
+
+
 def PATH(p):
     return os.path.abspath(
         os.path.join(os.path.dirname(__file__), p)
@@ -34,6 +48,13 @@ class BaseTest(unittest.TestCase):
     def setUp(self) -> None:
         self.driver = webdriver.Remote(
             'http://localhost:4723/wd/hub', self.caps)
+
+        if not GlobalVar().log_root_dir:
+            import datetime as dt
+            GlobalVar().log_root_dir = os.path.join(
+                PATH('.'), 'output', dt.datetime.now().strftime('%y%m%d-%H%M%S'))
+            os.path.isdir(GlobalVar().log_root_dir) or \
+                os.makedirs(GlobalVar().log_root_dir)
 
         # Start taking evidence
         self.make_log_dir(self._testMethodName)
