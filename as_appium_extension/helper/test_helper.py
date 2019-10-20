@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import os
-import unittest
 from typing import Any
 
-from appium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class GlobalVar(object):
@@ -29,54 +29,23 @@ def PATH(p):
     )
 
 
-caps = {
-    'platformName': "Android",
-    'platformVersion': "8.0",
-    # 'platformVersion': "9",
-    'deviceName': "Android Emulator",
-    'appPackage': "org.gnucash.android",
-    'appActivity': ".ui.account.AccountsActivity",
-    'automationName': "uiautomator2",
-}
+# the emulator is sometimes slow and needs time to think
+SLEEPY_TIME = 10
 
 
-class BaseTest(unittest.TestCase):
-    def __init__(self, method_name: str) -> None:
-        super(BaseTest, self).__init__(method_name)
-        self.caps = caps
-
-    def setUp(self) -> None:
-        self.driver = webdriver.Remote(
-            'http://localhost:4723/wd/hub', self.caps)
-
-        if not GlobalVar().log_root_dir:
-            import datetime as dt
-            GlobalVar().log_root_dir = os.path.join(
-                PATH('.'), 'output', dt.datetime.now().strftime('%y%m%d-%H%M%S'))
-            os.path.isdir(GlobalVar().log_root_dir) or \
-                os.makedirs(GlobalVar().log_root_dir)
-
-        # Start taking evidence
-        self.make_log_dir(self._testMethodName)
-        self.driver.start_recording_screen()
-
-    def tearDown(self) -> None:
-        # Stop taking evidence
-        payload = self.driver.stop_recording_screen()
-        with open(os.path.join(GlobalVar().log_dir, "cap.mp4"), "wb") as fd:
-            import base64
-            fd.write(base64.b64decode(payload))
-
-        with open(os.path.join(GlobalVar().log_dir, "log.txt"), "w") as fd:
-            logs = self.driver.get_log('logcat')
-            for lines in logs:
-                for line in lines['message'].split('¥n'):
-                    fd.write(line + '\n')
-
-        # end the session
-        self.driver.quit()
-
-    @staticmethod
-    def make_log_dir(dir_name: str) -> None:
-        GlobalVar().log_dir = os.path.join(GlobalVar().log_root_dir, dir_name)
-        os.path.isdir(GlobalVar().log_dir) or os.makedirs(GlobalVar().log_dir)
+def wait_for_element(driver, locator, value, timeout=SLEEPY_TIME):
+    """Wait until the element located
+    Args:
+        driver (`appium.webdriver.webdriver.WebDriver`): WebDriver instance
+        locator (str): Locator like WebDriver, Mobile JSON Wire Protocol
+            (e.g. `appium.webdriver.common.mobileby.MobileBy.ACCESSIBILITY_ID`)
+        value (str): Query value to locator
+        timeout (int): Maximum time to wait the element. If time is over, `TimeoutException` is thrown
+    Raises:
+        `selenium.common.exceptions.TimeoutException`
+    Returns:
+        `appium.webdriver.webelement.WebElement`: Found WebElement
+    """
+    return WebDriverWait(driver, timeout).until(
+        EC.presence_of_element_located((locator, value))
+    )
