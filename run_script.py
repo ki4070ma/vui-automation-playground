@@ -1,19 +1,23 @@
 #!/usr/bin/env python
 
-from vui_automation.voice import Voice
 from vui_automation.logcat import Logcat
+from vui_automation.voice import Voice
 
-
-if __name__ ==  '__main__':
-    # Usage: $ python run_script.py "hello" 'en' 'Displayed com.google.android.googlequicksearchbox'
+if __name__ == '__main__':
+    # Usage: $ python run_script.py "hello" 'en' 'Displayed
+    # com.google.android.googlequicksearchbox'
 
     import argparse
 
     parser = argparse.ArgumentParser(description='Automation for vui')
 
-    parser.add_argument('sentence', help='Sentence to say. e.g. "Ok google, hello."')
+    parser.add_argument(
+        'sentence',
+        help='Sentence to say. e.g. "Ok google, hello."')
     parser.add_argument('lang', help='Language. e.g. "ja", "en"')
-    parser.add_argument('word_to_wait', help='Word to wait. e.g. "Displayed com.google.android.googlequicksearchbox"')
+    parser.add_argument(
+        'word_to_wait',
+        help='Word to wait. e.g. "Displayed com.google.android.googlequicksearchbox"')
 
     args = parser.parse_args()
 

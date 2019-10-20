@@ -5,6 +5,7 @@ import subprocess as sp
 import threading
 import time
 
+
 class Logcat(object):
 
     def log_clear(self):
@@ -22,7 +23,8 @@ class Logcat(object):
         stdout_reader = AsynchronousFileReader(process.stdout, stdout_queue)
         stdout_reader.start()
 
-        # Check the queues if we received some output (until there is nothing more to get).
+        # Check the queues if we received some output (until there is nothing
+        # more to get).
         break_flg = False
         print('waiting...')
         start = time.time()

@@ -15,7 +15,8 @@ $python run_script.py "hello" 'en' 'Displayed com.google.android.googlequicksear
 ## Common
 
 ```bash
-$pip install isort
+$pip install isort pre-commit
+$pre-commit install
 ```
 
 ## Speech to text
