@@ -3,32 +3,20 @@
 # How to use script
 
 ```bash
-$python run_script.py "Ok google, hello" 'en' 'Displayed com.google.android.googlequicksearchbox'
+$pip install gTTS pyttsx3  # Linux
+# pip install gTTS pyttsx3 pyobjc  # Mac
+$sudo apt install mpg321 espeak  # Linux
+# brew install mpg321  # Mac
+$python run_script.py "hello" 'en' 'Displayed com.google.android.googlequicksearchbox'
 ```
 
-# Development (Linux)
+# Development
 
-## Text to speech
+## Common
 
+```bash
+$pip install isort
 ```
-$pip install pyttsx3
-$sudo apt-get update && sudo apt-get install espeak
-$python text_to_speech.py
-```
-
-## Text to speech 2
-
-```
-$pip install gTTS
-$sudo apt install mpg321
-$python text_to_speech_gtts.py
-```
-
-# Development(Mac)
-
-## Text to speech
-
-```pip install pyttsx3 pyobjc```
 
 ## Speech to text
 
