@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-from vui_automation.logcat import Logcat
-from vui_automation.voice import Voice
+from from_scratch.vui_automation import Logcat, Voice
 
 if __name__ == '__main__':
     # Usage: $ python run_script.py "hello" 'en' 'Displayed

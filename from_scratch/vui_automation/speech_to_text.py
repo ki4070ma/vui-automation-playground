@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 def speech_to_text():
     import speech_recognition as sr
 
@@ -15,6 +16,7 @@ def speech_to_text():
         print("Could not understand audio")
     except sr.RequestError as e:
         print("Could not request results; {0}".format(e))
+
 
 if __name__ == '__main__':
     speech_to_text()
