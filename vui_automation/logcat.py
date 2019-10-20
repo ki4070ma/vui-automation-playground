@@ -15,7 +15,6 @@ class Logcat(object):
         if log_clear:
             self.log_clear()
 
-        # You'll need to add any command line arguments here.
         process = sp.Popen(["adb", "logcat"], stdout=sp.PIPE)
 
         # Launch the asynchronous readers of the process' stdout.
@@ -25,17 +24,17 @@ class Logcat(object):
 
         # Check the queues if we received some output (until there is nothing
         # more to get).
-        break_flg = False
+        found_flg = False
         print('waiting...')
         start = time.time()
-        while not stdout_reader.eof() and break_flg is False and time.time() - start < 10:
+        while not stdout_reader.eof() and not found_flg and time.time() - start < 10:
             while not stdout_queue.empty():
                 line = str(stdout_queue.get())
                 if word in line:
+                    found_flg = True
                     print(line)
-                    break_flg = True
                     break
-        if break_flg:
+        if found_flg:
             print('***Found: {}'.format(word))
         else:
             print('***Not found: {}. Timeout: {}sec.'.format(word, timeout))

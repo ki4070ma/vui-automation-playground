@@ -8,7 +8,7 @@ from gtts import gTTS
 
 class Voice(object):
 
-    def say(self, text, lang):
+    def say(self, text='hello', lang='en'):
         '''Speech text from mic
 
         :param text: Text to speach
@@ -24,7 +24,7 @@ class Voice(object):
         if os.path.exists(tmp_file):
             os.remove(tmp_file)
 
-    def text_to_speech_pyttsx3(self, text):
+    def text_to_speech_pyttsx3(self, text='hello'):
         '''
 
         :param text:
