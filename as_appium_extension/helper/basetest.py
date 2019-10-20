@@ -5,6 +5,7 @@ import unittest
 
 from appium import webdriver
 
+from ..voice.voice import Voice
 from .test_helper import PATH, GlobalVar
 
 caps = {
@@ -32,13 +33,15 @@ class BaseTest(unittest.TestCase):
         if not GlobalVar().log_root_dir:
             import datetime as dt
             GlobalVar().log_root_dir = os.path.join(
-                PATH('.'), 'output', dt.datetime.now().strftime('%y%m%d-%H%M%S'))
+                PATH('..'), 'output', dt.datetime.now().strftime('%y%m%d-%H%M%S'))
             os.path.isdir(GlobalVar().log_root_dir) or \
                 os.makedirs(GlobalVar().log_root_dir)
 
         # Start taking evidence
         self.make_log_dir(self._testMethodName)
         self.driver.start_recording_screen()
+
+        self.voice = Voice()
 
     def tearDown(self) -> None:
         # Stop taking evidence

@@ -4,10 +4,11 @@
 
 ```bash
 $pip install gTTS pyttsx3  # Linux
-# pip install gTTS pyttsx3 pyobjc  # Mac
 $sudo apt install mpg321 espeak  # Linux
+# pip install gTTS pyttsx3 pyobjc  # Mac
 # brew install mpg321  # Mac
-$python run_script.py "hello" 'en' 'Displayed com.google.android.googlequicksearchbox'
+$cd as_appium_extension
+$pytest -s
 ```
 
 # Development

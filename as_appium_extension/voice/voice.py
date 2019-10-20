@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import subprocess as sp
 
 import pyttsx3
 from gtts import gTTS
@@ -17,12 +18,12 @@ class Voice(object):
         '''
 
         tmp_file = 'tmp.mp3'
-        tts = gTTS(text=text, lang=lang)
-        tts.save(tmp_file)
-        os.system("mpg321 {}".format(tmp_file))
-
         if os.path.exists(tmp_file):
             os.remove(tmp_file)
+
+        tts = gTTS(text=text, lang=lang)
+        tts.save(tmp_file)
+        self._play_audio_file(tmp_file, delete_file=True)
 
     def text_to_speech_pyttsx3(self, text='hello'):
         '''
@@ -34,15 +35,18 @@ class Voice(object):
         engine.say(text)
         engine.runAndWait()
 
-    def say_ok_google(self, file='files/ok_google_mori.mp3'):
-        '''
+    def say_ok_google(self):
+        self._play_audio_file(
+            file='files/ok_google_mori.mp3',
+            delete_file=False)
 
-        :param file:
-        :return:
-        '''
+    def _play_audio_file(self, file, delete_file=False):
         if not os.path.exists(file):
             raise FileExistsError("{} doesn't exist.".format(file))
-        os.system("mpg321 {}".format(file))
+        sp.run(['mpg321', file], stdout=sp.DEVNULL, stderr=sp.DEVNULL)
+
+        if delete_file and os.path.exists(file):
+            os.remove(file)
 
 
 if __name__ == '__main__':
