@@ -14,6 +14,8 @@ caps = {
     'deviceName': "Android Emulator",
     'appPackage': "org.gnucash.android",
     'appActivity': ".ui.account.AccountsActivity",
+    # 'appPackage': "com.google.android.googlequicksearchbox",  # NG
+    # 'appActivity': "com.google.android.apps.gsa.staticplugins.opa.OpaActivity",  # NG
     'automationName': "uiautomator2",
 }
 

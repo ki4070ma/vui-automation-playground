@@ -1,11 +1,12 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
+
 import os
 import unittest
 
-# from helper.test_helper import PATH, BaseTest, GlobalVar
-# from voice.voice import Voice
-from .helper.test_helper import PATH, BaseTest, GlobalVar
+from appium.webdriver.common.mobileby import MobileBy
+
+from .helper.basetest import BaseTest
+from .helper.test_helper import PATH, GlobalVar, wait_for_element
 from .voice.voice import Voice
 
 
@@ -15,16 +16,17 @@ class SampleAndroidTest(BaseTest):
 
         v = Voice()
 
-        print(self.driver.location)
-
-        self.driver.back()
         self.driver.back()
 
         v.say_ok_google()
-        v.say('hello', 'en')
 
-        import time
-        time.sleep(3)
+        id = 'com.google.android.googlequicksearchbox:id/chatui_text'
+        el = wait_for_element(self.driver, MobileBy.ID, id)
+        print('***start')
+        print(el.text)
+        print('***end')
+
+        v.say('hello', 'en')
 
 
 if __name__ == '__main__':
