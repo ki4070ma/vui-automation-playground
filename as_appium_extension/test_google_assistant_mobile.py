@@ -16,14 +16,13 @@ class GoogleAssistantTest(BaseTest):
         self._ok_google()
 
         # ***Ask weather
-        word = "what's the weather tomorrow"
-        self.voice.say(word, 'en')
+        self._say("what's the weather tomorrow")
 
-        el = wait_for_element(
-            self.driver,
-            MobileBy.ID,
-            GASSISTANT_PKG + ':id/chatui_streaming_text')
-        assert el.text == word
+        time.sleep(5)
+
+    def test_asu_no_tenki(self):
+        self._ok_google()
+        self._say("明日の天気", lang='ja')
 
         time.sleep(5)
 
@@ -51,3 +50,12 @@ class GoogleAssistantTest(BaseTest):
             MobileBy.ID,
             GASSISTANT_PKG + ':id/chatui_text')
         assert el.text == 'Hi, how can I help?'
+
+    def _say(self, word, lang='en'):
+        self.voice.say(word, lang)
+
+        el = wait_for_element(
+            self.driver,
+            MobileBy.ID,
+            GASSISTANT_PKG + ':id/chatui_streaming_text')
+        assert el.text == word
