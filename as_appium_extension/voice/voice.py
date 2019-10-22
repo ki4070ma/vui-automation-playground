@@ -51,6 +51,7 @@ if __name__ == '__main__':
 
     # voice.text_to_speech('OK Google, Good morning', 'en')
     # voice.text_to_speech('OK Google, こんにちは', 'ja')
+    voice.say_ok_google()
     voice.say('OK Google', 'en')
     # voice.text_to_speech('オーケー  グーグル', 'ja')
     # voice.text_to_speech('明日の天気を教えて', 'ja')

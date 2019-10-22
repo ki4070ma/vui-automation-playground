@@ -13,10 +13,7 @@ caps = {
     'platformVersion': "8.0",
     # 'platformVersion': "9",
     'deviceName': "Android Emulator",
-    'appPackage': "org.gnucash.android",
-    'appActivity': ".ui.account.AccountsActivity",
-    # 'appPackage': "com.google.android.googlequicksearchbox",  # NG
-    # 'appActivity': "com.google.android.apps.gsa.staticplugins.opa.OpaActivity",  # NG
+    'app': PATH('../files/ApiDemos-debug.apk'),
     'automationName': "uiautomator2",
 }
 
