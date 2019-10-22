@@ -34,7 +34,7 @@ class Voice(object):
         engine.say(text)
         engine.runAndWait()
 
-    def say_ok_google(self, file='files/ok_google_mori.mp3'):
+    def say_ok_google(self, file='files/ok_google.mp3'):
         '''
 
         :param file:
