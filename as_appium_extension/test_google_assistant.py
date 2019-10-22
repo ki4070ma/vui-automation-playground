@@ -25,7 +25,7 @@ class GoogleAssistantTest(BaseTest):
             GASSISTANT_PKG + ':id/chatui_streaming_text')
         assert el.text == word
 
-        time.sleep(3)
+        time.sleep(5)
 
     def test_open_music(self):
         self._ok_google()
@@ -34,9 +34,13 @@ class GoogleAssistantTest(BaseTest):
         word = "Launch music"
         self.voice.say(word, 'en')
 
-        time.sleep(3)
-
-        assert self.driver.current_package == 'com.miui.player'
+        TIMEOUT = 10
+        TARGET_PKG = 'com.miui.player'
+        for _ in range(TIMEOUT):
+            time.sleep(1)
+            if self.driver.current_package == TARGET_PKG:
+                break
+        assert self.driver.current_package == TARGET_PKG
 
     def _ok_google(self):
         # ***Ok, Google
