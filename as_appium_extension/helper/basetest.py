@@ -6,22 +6,14 @@ import unittest
 from appium import webdriver
 
 from ..voice.voice import Voice
-from .test_helper import PATH, GlobalVar
-
-caps = {
-    'platformName': "Android",
-    'platformVersion': "8.0",
-    # 'platformVersion': "9",
-    'deviceName': "Android Emulator",
-    'app': PATH('../files/ApiDemos-debug.apk'),
-    'automationName': "uiautomator2",
-}
+from .test_helper import GlobalVar
+from .desired_capabilities import get_disired_capabilities, PATH
 
 
 class BaseTest(unittest.TestCase):
     def __init__(self, method_name: str) -> None:
         super(BaseTest, self).__init__(method_name)
-        self.caps = caps
+        self.caps = get_disired_capabilities()
 
     def setUp(self) -> None:
         self.driver = webdriver.Remote(

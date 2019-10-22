@@ -8,7 +8,7 @@ $sudo apt install mpg321 espeak  # Linux
 # pip install gTTS pyttsx3 pyobjc  # Mac
 # brew install mpg321  # Mac
 $cd as_appium_extension
-$pytest -s
+$pytest -s test_google_assistant_mobile.py
 ```
 
 # Development

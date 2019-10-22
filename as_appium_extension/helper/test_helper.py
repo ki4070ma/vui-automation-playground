@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 import os
 from typing import Any
@@ -19,14 +18,6 @@ class GlobalVar(object):
         if cls._instance is None:
             cls._instance = object.__new__(cls)
         return cls._instance
-
-# Returns abs path relative to this file and not cwd
-
-
-def PATH(p):
-    return os.path.abspath(
-        os.path.join(os.path.dirname(__file__), p)
-    )
 
 
 # the emulator is sometimes slow and needs time to think
