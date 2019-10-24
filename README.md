@@ -2,11 +2,22 @@
 
 # How to use script
 
+## Set up appium server
+* I'd recommend appium-desktop
+   * https://github.com/appium/appium-desktop
+
+## Resolve dependencies
+
 ```bash
 $pip install gTTS pyttsx3  # Linux
 $sudo apt install mpg321 espeak  # Linux
 # pip install gTTS pyttsx3 pyobjc  # Mac
 # brew install mpg321  # Mac
+```
+
+## Execute script
+
+```bash
 $cd as_appium_extension
 $pytest -s test_google_assistant_mobile.py
 $pytest -s test_google_assistant_mobile.py::GoogleAssistantTest::test_asu_no_tenki
