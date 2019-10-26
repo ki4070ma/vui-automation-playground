@@ -6,8 +6,8 @@ import unittest
 from appium import webdriver
 
 from ..voice.voice import Voice
+from .desired_capabilities import PATH, get_disired_capabilities
 from .test_helper import GlobalVar
-from .desired_capabilities import get_disired_capabilities, PATH
 
 
 class BaseTest(unittest.TestCase):
