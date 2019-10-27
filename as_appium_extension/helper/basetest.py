@@ -7,7 +7,8 @@ from appium.webdriver.common.mobileby import MobileBy
 
 from ..voice.voice import Voice
 from .desired_capabilities import PATH, get_disired_capabilities
-from .test_helper import GlobalVar, wait_for_element, wait_for_elements
+from .test_helper import (GlobalVar, get_locale, wait_for_element,
+                          wait_for_elements)
 
 
 class BaseTest(object):
@@ -51,11 +52,6 @@ class BaseTest(object):
         # end the session
         self.driver.quit()
 
-    @staticmethod
-    def make_log_dir(dir_name: str) -> None:
-        GlobalVar().log_dir = os.path.join(GlobalVar().log_root_dir, dir_name)
-        os.path.isdir(GlobalVar().log_dir) or os.makedirs(GlobalVar().log_dir)
-
     def _init_ok_google(self, response='Hi, how can I help?'):
         # ***Ok, Google
         self.voice.say_ok_google()
@@ -75,3 +71,31 @@ class BaseTest(object):
                 MobileBy.ID,
                 self.GASSISTANT_PKG + ':id/chatui_streaming_text')[-1]
             assert el.text == word
+
+    @staticmethod
+    def make_log_dir(dir_name: str) -> None:
+        GlobalVar().log_dir = os.path.join(GlobalVar().log_root_dir, dir_name)
+        os.path.isdir(GlobalVar().log_dir) or os.makedirs(GlobalVar().log_dir)
+
+    @staticmethod
+    def pre_proc(target_locale):
+        driver = webdriver.Remote(
+            'http://localhost:4723/wd/hub',
+            get_disired_capabilities())
+        try:
+            locale = get_locale(driver)
+            if locale != target_locale:
+                # TODO Change locale to 'locale'
+                # data = {"command": "am",
+                #         "args": "start -n net.sanapeli.adbchangelanguage/.AdbChangeLanguage -e language {}".format(
+                #             locale).split()}
+                # driver.execute_script('mobile:shell', data)
+                raise SystemError(
+                    "Device locale is {}, not {}.".format(locale, target_locale))
+
+            data = {
+                "command": "pm",
+                "args": "grant net.sanapeli.adbchangelanguage android.permission.CHANGE_CONFIGURATION".split()}
+            driver.execute_script('mobile:shell', data)
+        finally:
+            driver.quit()
