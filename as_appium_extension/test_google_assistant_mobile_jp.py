@@ -9,7 +9,7 @@ TARGET_MUSIC_PKG = 'com.miui.player'
 TIMEOUT = 10
 
 
-class GoogleAssistantTestJp(BaseTest):
+class TestGoogleAssistantJp(BaseTest):
 
     def test_asu_no_tenki(self):
         self._init_ok_google(response="はい、どんなご用でしょう？")

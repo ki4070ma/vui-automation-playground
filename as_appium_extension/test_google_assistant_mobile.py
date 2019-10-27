@@ -2,17 +2,15 @@
 
 import time
 
-from appium.webdriver.common.mobileby import MobileBy
-
 from .helper.basetest import BaseTest
-from .helper.test_helper import get_volume, wait_for_element, wait_for_elements
+from .helper.test_helper import get_volume
 
 GASSISTANT_PKG = 'com.google.android.googlequicksearchbox'
 TARGET_MUSIC_PKG = 'com.miui.player'
 TIMEOUT = 10
 
 
-class GoogleAssistantTest(BaseTest):
+class TestGoogleAssistant(BaseTest):
 
     def test_whats_the_weather(self):
         self._init_ok_google()

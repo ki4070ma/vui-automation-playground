@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import os
-import unittest
 
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
@@ -11,14 +10,11 @@ from .desired_capabilities import PATH, get_disired_capabilities
 from .test_helper import GlobalVar, wait_for_element, wait_for_elements
 
 
-class BaseTest(unittest.TestCase):
+class BaseTest(object):
     GASSISTANT_PKG = 'com.google.android.googlequicksearchbox'
 
-    def __init__(self, method_name: str) -> None:
-        super(BaseTest, self).__init__(method_name)
+    def setup_method(self, method) -> None:
         self.caps = get_disired_capabilities()
-
-    def setUp(self) -> None:
         self.driver = webdriver.Remote(
             'http://localhost:4723/wd/hub', self.caps)
 
@@ -30,12 +26,12 @@ class BaseTest(unittest.TestCase):
                 os.makedirs(GlobalVar().log_root_dir)
 
         # Start taking evidence
-        self.make_log_dir(self._testMethodName)
+        self.make_log_dir(method.__name__)
         self.driver.start_recording_screen()
 
         self.voice = Voice()
 
-    def tearDown(self) -> None:
+    def teardown_method(self) -> None:
         # Stop taking evidence
         payload = self.driver.stop_recording_screen()
         with open(os.path.join(GlobalVar().log_dir, "cap.mp4"), "wb") as fd:
