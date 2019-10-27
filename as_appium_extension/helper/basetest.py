@@ -1,19 +1,37 @@
 #!/usr/bin/python
 
 import os
-import unittest
 
 from appium import webdriver
+from appium.webdriver.common.mobileby import MobileBy
 
 from ..voice.voice import Voice
 from .desired_capabilities import PATH, get_disired_capabilities
-from .test_helper import GlobalVar
+from .test_helper import (GlobalVar, get_volume, wait_for_element,
+                          wait_for_elements)
 
 
-class BaseTest(unittest.TestCase):
+class BaseTest(object):
+    GASSISTANT_PKG = 'com.google.android.googlequicksearchbox'
+
     def __init__(self, method_name: str) -> None:
         super(BaseTest, self).__init__(method_name)
         self.caps = get_disired_capabilities()
+
+    def stUpClass(self, locale='en_US'):
+        self.driver = webdriver.Remote(
+            'http://localhost:4723/wd/hub', self.caps)
+
+        data = {
+            "command": "pm",
+            "args": "grant net.sanapeli.adbchangelanguage android.permission.CHANGE_CONFIGURATION".split()}
+        self.driver.execute_script('mobile:shell', data)
+        if locale:
+            data = {"command": "am",
+                    "args": "start -n net.sanapeli.adbchangelanguage/.AdbChangeLanguage -e language {}".format(locale).split()}
+            self.driver.execute_script('mobile:shell', data)
+
+        self.driver.quit()
 
     def setUp(self) -> None:
         self.driver = webdriver.Remote(
@@ -56,3 +74,24 @@ class BaseTest(unittest.TestCase):
     def make_log_dir(dir_name: str) -> None:
         GlobalVar().log_dir = os.path.join(GlobalVar().log_root_dir, dir_name)
         os.path.isdir(GlobalVar().log_dir) or os.makedirs(GlobalVar().log_dir)
+
+    def _init_ok_google(self, response='Hi, how can I help?'):
+        # ***Ok, Google
+        self.voice.say_ok_google()
+
+        el = wait_for_element(
+            self.driver,
+            MobileBy.ID,
+            self.GASSISTANT_PKG + ':id/chatui_text')
+        print(el.text)
+        assert el.text == response
+
+    def _say(self, word, lang='en', check_text=True):
+        self.voice.say(word, lang)
+
+        if check_text:
+            el = wait_for_elements(
+                self.driver,
+                MobileBy.ID,
+                self.GASSISTANT_PKG + ':id/chatui_streaming_text')[-1]
+            assert el.text == word
