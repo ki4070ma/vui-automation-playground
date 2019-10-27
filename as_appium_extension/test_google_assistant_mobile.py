@@ -2,8 +2,11 @@
 
 import time
 
+from appium import webdriver
+
 from .helper.basetest import BaseTest
-from .helper.test_helper import get_volume
+from .helper.desired_capabilities import get_disired_capabilities
+from .helper.test_helper import get_locale, get_volume
 
 GASSISTANT_PKG = 'com.google.android.googlequicksearchbox'
 TARGET_MUSIC_PKG = 'com.miui.player'
@@ -11,6 +14,17 @@ TIMEOUT = 10
 
 
 class TestGoogleAssistant(BaseTest):
+
+    @classmethod
+    def setup_class(cls):
+        driver = webdriver.Remote(
+            'http://localhost:4723/wd/hub',
+            get_disired_capabilities())
+        locale = get_locale(driver)
+        driver.quit()
+        if locale != 'en_US':
+            # TODO Change locale to en_US
+            raise SystemError("Device locale is {}, not en_US.".format(locale))
 
     def test_whats_the_weather(self):
         self._init_ok_google()

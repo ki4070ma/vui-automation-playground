@@ -74,3 +74,9 @@ def get_volume(driver):
         elif KEY in line:
             flg_STREAM_MUSIC = True
     raise SystemError("Can't get volume from the device.")
+
+
+def get_locale(driver):
+    data = {"command": "getprop", "args": ["persist.sys.locale"]}
+    return driver.execute_script(
+        'mobile:shell', data).strip().replace('-', '_')
