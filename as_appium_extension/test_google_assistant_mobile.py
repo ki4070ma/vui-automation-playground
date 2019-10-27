@@ -61,23 +61,3 @@ class GoogleAssistantTest(BaseTest):
             if self.driver.current_package == TARGET_MUSIC_PKG:
                 break
         assert self.driver.current_package == TARGET_MUSIC_PKG
-
-    def _init_ok_google(self):
-        # ***Ok, Google
-        self.voice.say_ok_google()
-
-        el = wait_for_element(
-            self.driver,
-            MobileBy.ID,
-            GASSISTANT_PKG + ':id/chatui_text')
-        assert el.text == 'Hi, how can I help?'
-
-    def _say(self, word, lang='en', check_text=True):
-        self.voice.say(word, lang)
-
-        if check_text:
-            el = wait_for_elements(
-                self.driver,
-                MobileBy.ID,
-                GASSISTANT_PKG + ':id/chatui_streaming_text')[-1]
-            assert el.text == word
