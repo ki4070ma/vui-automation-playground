@@ -20,11 +20,23 @@ class TestGoogleAssistantJp(BaseTest):
         driver = webdriver.Remote(
             'http://localhost:4723/wd/hub',
             get_disired_capabilities())
-        locale = get_locale(driver)
-        driver.quit()
-        if locale != 'ja_JP':
-            # TODO Change locale to ja_JP
-            raise SystemError("Device locale is {}, not ja_JP.".format(locale))
+        try:
+            locale = get_locale(driver)
+            if locale != 'ja_JP':
+                # TODO Change locale to ja_JP
+                # data = {"command": "am",
+                #         "args": "start -n net.sanapeli.adbchangelanguage/.AdbChangeLanguage -e language {}".format(
+                #             locale).split()}
+                # driver.execute_script('mobile:shell', data)
+                raise SystemError(
+                    "Device locale is {}, not ja_JP.".format(locale))
+
+            data = {
+                "command": "pm",
+                "args": "grant net.sanapeli.adbchangelanguage android.permission.CHANGE_CONFIGURATION".split()}
+            driver.execute_script('mobile:shell', data)
+        finally:
+            driver.quit()
 
     def test_asu_no_tenki(self):
         self._init_ok_google(response="はい、どんなご用でしょう？")
