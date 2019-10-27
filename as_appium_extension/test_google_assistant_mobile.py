@@ -50,12 +50,6 @@ class GoogleAssistantTest(BaseTest):
                 break
         assert get_volume(self.driver) > volume
 
-    # def test_asu_no_tenki(self):
-    #     self._ok_google()
-    #     self._say("明日の天気", lang='ja')
-    #
-    #     time.sleep(5)
-
     def test_open_music(self):
         self._init_ok_google()
 

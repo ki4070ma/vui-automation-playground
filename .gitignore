@@ -5,3 +5,5 @@ __pycache__/
 output/
 
 *mp3
+
+.DS_Store
