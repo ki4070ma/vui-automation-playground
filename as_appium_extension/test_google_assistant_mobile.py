@@ -12,9 +12,12 @@ TIMEOUT = 10
 
 class TestGoogleAssistant(BaseTest):
 
+    LANG = 'en'
+    LOCALE = 'en_US'
+
     @classmethod
     def setup_class(cls):
-        BaseTest.pre_proc('en_US')
+        BaseTest.pre_proc(cls.LOCALE)
 
     def test_whats_the_weather(self):
         self._init_ok_google()
@@ -30,7 +33,7 @@ class TestGoogleAssistant(BaseTest):
         # ***Ask "volume zero"
         self._say("volume zero", check_text=False)
 
-        for _ in range(TIMEOUT):
+        for _ in range(TIMEOUT):  # TODO Make better
             time.sleep(1)
             if get_volume(self.driver) == 0:
                 break
@@ -46,7 +49,7 @@ class TestGoogleAssistant(BaseTest):
         # ***Ask "volume up"
         self._say("volume up", check_text=False)
 
-        for _ in range(TIMEOUT):
+        for _ in range(TIMEOUT):  # TODO Make better
             time.sleep(1)
             if get_volume(self.driver) > volume:
                 break
@@ -56,9 +59,9 @@ class TestGoogleAssistant(BaseTest):
         self._init_ok_google()
 
         # ***Ask weather
-        self.voice.say("Launch music", 'en')
+        self.voice.say("Launch music", self.LANG)
 
-        for _ in range(TIMEOUT):
+        for _ in range(TIMEOUT):  # TODO Make better
             time.sleep(1)
             if self.driver.current_package == TARGET_MUSIC_PKG:
                 break

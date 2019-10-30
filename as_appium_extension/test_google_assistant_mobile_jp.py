@@ -11,12 +11,15 @@ TIMEOUT = 10
 
 class TestGoogleAssistantJp(BaseTest):
 
+    LANG = 'ja'
+    LOCALE = 'ja_JP'
+
     @classmethod
     def setup_class(cls):
-        BaseTest.pre_proc('ja_JP')
+        BaseTest.pre_proc(cls.LOCALE)
 
     def test_asu_no_tenki(self):
         self._init_ok_google(response="はい、どんなご用でしょう？")
-        self._say("明日の天気", lang='ja')
+        self._say("明日の天気", lang=self.LANG)
 
         time.sleep(5)
