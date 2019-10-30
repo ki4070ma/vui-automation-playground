@@ -2,8 +2,9 @@
 
 import time
 
+from as_appium_extension.device.device import get_volume
+
 from .helper.basetest import BaseTest
-from .helper.test_helper import get_volume
 
 GASSISTANT_PKG = 'com.google.android.googlequicksearchbox'
 TARGET_MUSIC_PKG = 'com.miui.player'

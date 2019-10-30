@@ -4,11 +4,12 @@ import os
 
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
+from as_appium_extension.device.device import get_locale
 
+from ..sentences.loader import SentenceLoader
 from ..voice.voice import Voice
 from .desired_capabilities import PATH, get_disired_capabilities
-from .test_helper import (GlobalVar, get_locale, wait_for_element,
-                          wait_for_elements)
+from .test_helper import GlobalVar, wait_for_element, wait_for_elements
 
 
 class BaseTest(object):
@@ -29,6 +30,8 @@ class BaseTest(object):
         # Start taking evidence
         self.make_log_dir(method.__name__)
         self.driver.start_recording_screen()
+
+        self.s = SentenceLoader()
 
         self.voice = Voice()
 

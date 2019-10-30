@@ -19,7 +19,9 @@ class TestGoogleAssistantJp(BaseTest):
         BaseTest.pre_proc(cls.LOCALE)
 
     def test_asu_no_tenki(self):
-        self._init_ok_google(response="はい、どんなご用でしょう？")
-        self._say("明日の天気", lang=self.LANG)
+        self._init_ok_google(
+            response=self.s.get_sentence(
+                "ok_google_res", self.LOCALE))
+        self._say(self.s.get_sentence("weather", self.LOCALE), lang=self.LANG)
 
         time.sleep(5)
