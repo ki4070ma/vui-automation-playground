@@ -20,4 +20,7 @@ class SentenceLoader(object):
         return self.sentences_json.keys()
 
     def get_sentence(self, name, locale):
-        return self.sentences_json[name][locale]
+        return self.sentences_json[name][locale]["content"]
+
+    def get_response(self, name, locale):
+        return self.sentences_json[name][locale]["res"]

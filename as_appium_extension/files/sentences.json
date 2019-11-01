@@ -1,11 +1,13 @@
 {
   "ok_google": {
-    "en_US": "OK google",
-    "ja_JP": "OK google"
-  },
-  "ok_google_res": {
-    "en_US": "Hi, how can I help?",
-    "ja_JP": "はい、どんなご用でしょう？"
+    "en_US": {
+      "content": "OK google",
+      "res": "Hi, how can I help?"
+    },
+    "ja_JP": {
+      "content": "OK google",
+      "res": "はい、どんなご用でしょう？"
+    }
   },
   "weather": {
     "en_US": "what's the weather tomorrow",
