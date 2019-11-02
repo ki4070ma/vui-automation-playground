@@ -4,10 +4,10 @@ import os
 
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
-from as_appium_extension.device.device import get_locale
+from device.device import get_locale
+from sentences.loader import SentenceLoader
+from voice.voice import Voice
 
-from ..sentences.loader import SentenceLoader
-from ..voice.voice import Voice
 from .desired_capabilities import PATH, get_disired_capabilities
 from .test_helper import GlobalVar, wait_for_element, wait_for_elements
 

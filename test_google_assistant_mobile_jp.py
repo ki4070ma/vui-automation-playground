@@ -2,7 +2,7 @@
 
 import time
 
-from .helper.basetest import BaseTest
+from helper.basetest import BaseTest
 
 GASSISTANT_PKG = 'com.google.android.googlequicksearchbox'
 TARGET_MUSIC_PKG = 'com.miui.player'
@@ -18,7 +18,7 @@ class TestGoogleAssistantJp(BaseTest):
     def setup_class(cls):
         BaseTest.pre_proc(cls.LOCALE)
 
-    def test_asu_no_tenki(self):
+    def test_whats_the_weather(self):
         self._init_ok_google(
             response=self.s.get_response(
                 "ok_google", self.LOCALE))
