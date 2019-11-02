@@ -9,6 +9,7 @@ from gtts import gTTS
 DIR = 'files'
 AUDIO_DIR = os.path.join(DIR, 'audio')
 
+
 class Voice(object):
 
     def say(self, text='hello', lang='en'):
@@ -19,7 +20,9 @@ class Voice(object):
         :return: None
         '''
 
-        filename = os.path.join(AUDIO_DIR, '_'.join(text.split()).lower() + '.mp3')
+        filename = os.path.join(
+            AUDIO_DIR, '_'.join(
+                text.split()).lower() + '.mp3')
         if not os.path.exists(filename):
             tts = gTTS(text=text, lang=lang)
             tts.save(filename)
