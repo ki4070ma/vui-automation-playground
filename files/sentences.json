@@ -10,16 +10,26 @@
     }
   },
   "weather": {
-    "en_US": "what's the weather tomorrow",
-    "ja_JP": "明日の天気"
+    "en_US": {
+      "content": "what's the weather tomorrow"
+    },
+    "ja_JP": {
+      "content": "明日の天気"
+    }
   },
   "volume_zero": {
-    "en_US": "volume zero"
+    "en_US": {
+      "content": "volume zero"
+    }
   },
   "volume_up": {
-    "en_US": "volume up"
+    "en_US": {
+      "content": "volume up"
+    }
   },
   "open_music": {
-    "en_US": "Launch music"
+    "en_US": {
+      "content": "Launch music"
+    }
   }
 }
