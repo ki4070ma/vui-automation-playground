@@ -20,4 +20,4 @@ def get_volume(driver):
 def get_locale(driver):
     data = {"command": "getprop", "args": ["persist.sys.locale"]}
     return driver.execute_script(
-        'mobile:shell', data).strip().replace('-', '_')
+        'mobile:shell', data).strip().replace('-', '-r')

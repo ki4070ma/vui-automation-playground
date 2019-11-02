@@ -88,13 +88,10 @@ class BaseTest(object):
         try:
             locale = get_locale(driver)
             if locale != target_locale:
-                # TODO Change locale to 'locale'
-                # data = {"command": "am",
-                #         "args": "start -n net.sanapeli.adbchangelanguage/.AdbChangeLanguage -e language {}".format(
-                #             locale).split()}
-                # driver.execute_script('mobile:shell', data)
-                raise SystemError(
-                    "Device locale is {}, not {}.".format(locale, target_locale))
+                data = {"command": "am",
+                        "args": "start -n net.sanapeli.adbchangelanguage/.AdbChangeLanguage -e language {}".format(
+                            target_locale.replace('_', '-r')).split()}
+                driver.execute_script('mobile:shell', data)
 
             data = {
                 "command": "pm",

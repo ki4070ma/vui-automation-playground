@@ -3,8 +3,12 @@
 # How to use script
 
 ## Set up appium server
-* I'd recommend appium-desktop
+* Appium desktop
    * https://github.com/appium/appium-desktop
+   * Need `--allow-insecure=adb_shell` (Not sure how to setup in appium desktop)
+* Appium
+   * http://appium.io/docs/en/about-appium/getting-started/
+   * `$appium --allow-insecure=adb_shell`
 
 ## Resolve dependencies
 
