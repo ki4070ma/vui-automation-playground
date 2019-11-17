@@ -2,7 +2,9 @@
 
 import time
 
+from appium.webdriver.common.mobileby import MobileBy
 from helper.basetest_no_voice import BaseTestNoVoice
+from helper.test_helper import wait_for_element
 
 GASSISTANT_PKG = 'com.google.android.googlequicksearchbox'
 TARGET_MUSIC_PKG = 'com.miui.player'
@@ -13,21 +15,19 @@ class TestGoogleAssistant(BaseTestNoVoice):
 
     def test_whats_the_weather(self):
 
-        self.driver.find_element_by_id(
-            'com.google.android.googlequicksearchbox:id/logo_view').click()
+        self._ID('logo_view').click()
 
-        import time
-        time.sleep(5)
+        self._ID('keyboard_indicator').click()
 
-        self.driver.find_element_by_id(
-            'com.google.android.googlequicksearchbox:id/keyboard_indicator').click()
-        time.sleep(5)
+        self._ID('input_text').send_keys("what's the weather tomorrow")
 
-        el = self.driver.find_element_by_id(
-            'com.google.android.googlequicksearchbox:id/input_text')
-        el.send_keys("what's the weather tomorrow")
-
-        self.driver.find_element_by_id(
-            'com.google.android.googlequicksearchbox:id/explore_icon_container').click()
+        self._ID('explore_icon_container').click()
 
         time.sleep(5)
+
+    def _ID(self, id):
+        return wait_for_element(
+            self.driver,
+            MobileBy.ID,
+            '{}:id/{}'.format(GASSISTANT_PKG, id)
+        )
