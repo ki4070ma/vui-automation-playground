@@ -4,7 +4,6 @@ import os
 
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
-from device.device import get_locale
 from sentences.loader import SentenceLoader
 from voice.voice import Voice
 
@@ -81,21 +80,11 @@ class BaseTest(object):
         os.path.isdir(GlobalVar().log_dir) or os.makedirs(GlobalVar().log_dir)
 
     @staticmethod
-    def pre_proc(target_locale):
-        driver = webdriver.Remote(
-            'http://localhost:4723/wd/hub',
-            get_disired_capabilities())
-        try:
-            locale = get_locale(driver)
-            if locale != target_locale:
-                data = {"command": "am",
-                        "args": "start -n net.sanapeli.adbchangelanguage/.AdbChangeLanguage -e language {}".format(
-                            target_locale.replace('_', '-r')).split()}
-                driver.execute_script('mobile:shell', data)
-
-            data = {
-                "command": "pm",
-                "args": "grant net.sanapeli.adbchangelanguage android.permission.CHANGE_CONFIGURATION".split()}
-            driver.execute_script('mobile:shell', data)
-        finally:
-            driver.quit()
+    def pre_proc(lang, locale):
+        caps = get_disired_capabilities()
+        # FIXME When lang and locale are changed. it's neccesary to turn on
+        # voice match
+        caps['language'] = lang
+        caps['locale'] = locale
+        driver = webdriver.Remote('http://localhost:4723/wd/hub', caps)
+        driver.quit()
