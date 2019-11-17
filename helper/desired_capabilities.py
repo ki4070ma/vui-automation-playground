@@ -16,7 +16,6 @@ def get_disired_capabilities():
         # 'platformVersion': "9",
         'deviceName': "Android Emulator",
         'app': PATH('../files/ApiDemos-debug.apk'),
-        'otherApps': PATH('../files/apk/net.sanapeli.adbchangelanguage_0.80.apk'),
         'automationName': "uiautomator2",
     }
     return caps

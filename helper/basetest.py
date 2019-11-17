@@ -4,7 +4,6 @@ import os
 
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
-from device.device import get_locale
 from sentences.loader import SentenceLoader
 from voice.voice import Voice
 
@@ -83,9 +82,9 @@ class BaseTest(object):
     @staticmethod
     def pre_proc(lang, locale):
         caps = get_disired_capabilities()
+        # FIXME When lang and locale are changed. it's neccesary to turn on
+        # voice match
         caps['language'] = lang
         caps['locale'] = locale
-        driver = webdriver.Remote(
-            'http://localhost:4723/wd/hub',
-            caps)
+        driver = webdriver.Remote('http://localhost:4723/wd/hub', caps)
         driver.quit()
