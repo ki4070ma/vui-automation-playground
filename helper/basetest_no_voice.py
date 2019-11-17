@@ -75,3 +75,13 @@ class BaseTestNoVoice(object):
     def make_log_dir(dir_name: str) -> None:
         GlobalVar().log_dir = os.path.join(GlobalVar().log_root_dir, dir_name)
         os.path.isdir(GlobalVar().log_dir) or os.makedirs(GlobalVar().log_dir)
+
+    @staticmethod
+    def pre_proc(lang, locale):
+        caps = get_disired_capabilities_no_voice()
+        # FIXME When lang and locale are changed. it's neccesary to turn on
+        # voice match
+        caps['language'] = lang
+        caps['locale'] = locale
+        driver = webdriver.Remote('http://localhost:4723/wd/hub', caps)
+        driver.quit()
