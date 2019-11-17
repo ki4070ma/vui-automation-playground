@@ -30,6 +30,9 @@
   "open_music": {
     "en_US": {
       "content": "Launch music"
+    },
+    "ja_JP": {
+      "content": "ミュージックプレーヤーを開いて"
     }
   }
 }

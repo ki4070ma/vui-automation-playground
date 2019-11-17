@@ -21,11 +21,24 @@ class TestGoogleAssistant(BaseTestNoVoice):
     def test_whats_the_weather(self):
         self.open_chat_mode()
 
-        self.input_text(
-            self.s.get_sentence(
-                "weather",
-                "{}_{}".format(
-                    self.LANG,
-                    self.LOCALE)))
+        self.input_text(self._text('weather'))
 
         time.sleep(5)
+
+        # TODO Add assertion
+
+    def test_open_music(self):
+        self.open_chat_mode()
+
+        self.input_text(self._text('open_music'))
+
+        time.sleep(5)
+
+        # TODO Add assertion
+
+    def _text(self, str_id):
+        return self.s.get_sentence(
+            str_id,
+            "{}_{}".format(
+                self.LANG,
+                self.LOCALE))
