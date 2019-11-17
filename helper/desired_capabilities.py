@@ -19,3 +19,17 @@ def get_disired_capabilities():
         'automationName': "uiautomator2",
     }
     return caps
+
+
+def get_disired_capabilities_no_voice():
+    caps = {
+        'platformName': "Android",
+        'platformVersion': "8.0",
+        # 'platformVersion': "9",
+        'deviceName': "Android Emulator",
+        'app': PATH('../files/ApiDemos-debug.apk'),
+        'appPackage': 'com.google.android.apps.googleassistant',
+        'appActivity': '.AssistantActivity',
+        'automationName': "uiautomator2",
+    }
+    return caps
