@@ -8,7 +8,7 @@ from sentences.loader import SentenceLoader
 from voice.voice import Voice
 
 from .desired_capabilities import PATH, get_disired_capabilities_no_voice
-from .test_helper import GlobalVar, wait_for_element, wait_for_elements
+from .test_helper import GlobalVar, wait_for_element
 
 # TODO This class is almost same to basetest.py
 
@@ -56,25 +56,20 @@ class BaseTestNoVoice(object):
         # end the session
         self.driver.quit()
 
-    def _init_ok_google(self, response='Hi, how can I help?'):
-        # ***Ok, Google
-        self.voice.say_ok_google()
+    def open_chat_mode(self):
+        self._ID('logo_view').click()
+        self._ID('keyboard_indicator').click()
 
-        el = wait_for_element(
+    def input_text(self, text):
+        self._ID('input_text').send_keys(text)
+        self._ID('explore_icon_container').click()
+
+    def _ID(self, id):
+        return wait_for_element(
             self.driver,
             MobileBy.ID,
-            self.GASSISTANT_PKG + ':id/chatui_text')
-        assert el.text == response
-
-    def _say(self, word, lang='en', check_text=True):
-        self.voice.say(word, lang)
-
-        if check_text:
-            el = wait_for_elements(
-                self.driver,
-                MobileBy.ID,
-                self.GASSISTANT_PKG + ':id/chatui_streaming_text')[-1]
-            assert el.text == word
+            '{}:id/{}'.format(self.GASSISTANT_PKG, id)
+        )
 
     @staticmethod
     def make_log_dir(dir_name: str) -> None:
