@@ -12,12 +12,13 @@ TIMEOUT = 10
 
 class TestGoogleAssistant(BaseTest):
 
+    # Format comes from http://appium.io/docs/en/writing-running-appium/caps/
     LANG = 'en'
-    LOCALE = 'en_US'
+    LOCALE = 'US'
 
     @classmethod
     def setup_class(cls):
-        BaseTest.pre_proc(cls.LOCALE)
+        BaseTest.pre_proc(cls.LANG, cls.LOCALE)
 
     def test_whats_the_weather(self):
         self._init_ok_google()

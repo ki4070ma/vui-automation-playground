@@ -81,21 +81,11 @@ class BaseTest(object):
         os.path.isdir(GlobalVar().log_dir) or os.makedirs(GlobalVar().log_dir)
 
     @staticmethod
-    def pre_proc(target_locale):
+    def pre_proc(lang, locale):
+        caps = get_disired_capabilities()
+        caps['language'] = lang
+        caps['locale'] = locale
         driver = webdriver.Remote(
             'http://localhost:4723/wd/hub',
-            get_disired_capabilities())
-        try:
-            locale = get_locale(driver)
-            if locale != target_locale:
-                data = {"command": "am",
-                        "args": "start -n net.sanapeli.adbchangelanguage/.AdbChangeLanguage -e language {}".format(
-                            target_locale.replace('_', '-r')).split()}
-                driver.execute_script('mobile:shell', data)
-
-            data = {
-                "command": "pm",
-                "args": "grant net.sanapeli.adbchangelanguage android.permission.CHANGE_CONFIGURATION".split()}
-            driver.execute_script('mobile:shell', data)
-        finally:
-            driver.quit()
+            caps)
+        driver.quit()
