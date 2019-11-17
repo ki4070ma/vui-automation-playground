@@ -25,7 +25,8 @@ class TestGoogleAssistant(BaseTestNoVoice):
 
         time.sleep(5)
 
-        # TODO Add assertion
+        # TODO Add assertion other than text match since the answer is very
+        # changable.
 
     def test_open_music(self):
         self.open_chat_mode()
@@ -34,7 +35,7 @@ class TestGoogleAssistant(BaseTestNoVoice):
 
         time.sleep(5)
 
-        # TODO Add assertion
+        assert 'Google Playミュージック' in self._dump_response()
 
     def _text(self, str_id):
         return self.s.get_sentence(
@@ -42,3 +43,8 @@ class TestGoogleAssistant(BaseTestNoVoice):
             "{}_{}".format(
                 self.LANG,
                 self.LOCALE))
+
+    def _dump_response(self):
+        els = self.driver.find_elements_by_class_name(
+            'android.widget.TextView')
+        return [el.text for el in els]
