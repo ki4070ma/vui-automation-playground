@@ -1,2 +1,2 @@
 gTTS == 2.1.1
-pyttsx3 == 2.80
+pyttsx3 == 2.81
