@@ -12,10 +12,8 @@ def PATH(p):
 def get_disired_capabilities():
     caps = {
         'platformName': "Android",
-        'platformVersion': "8.0",
-        # 'platformVersion': "9",
         'deviceName': "Android Emulator",
-        'app': PATH('../files/ApiDemos-debug.apk'),
+        'app': PATH('../files/ApiDemos-debug.apk.zip'),
         'automationName': "uiautomator2",
     }
     return caps
@@ -24,10 +22,8 @@ def get_disired_capabilities():
 def get_disired_capabilities_no_voice():
     caps = {
         'platformName': "Android",
-        'platformVersion': "8.0",
-        # 'platformVersion': "9",
         'deviceName': "Android Emulator",
-        'app': PATH('../files/ApiDemos-debug.apk'),
+        'app': PATH('../files/ApiDemos-debug.apk.zip'),
         'appPackage': 'com.google.android.apps.googleassistant',
         'appActivity': '.AssistantActivity',
         'automationName': "uiautomator2",

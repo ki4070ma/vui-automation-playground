@@ -22,7 +22,13 @@ class TestGoogleAssistantJp(BaseTest):
     def test_whats_the_weather(self):
         self._init_ok_google(
             response=self.s.get_response(
-                "ok_google", self.LOCALE))
-        self._say(self.s.get_sentence("weather", self.LOCALE), lang=self.LANG)
+                "ok_google", '{}_{}'.format(self.LANG, self.LOCALE)))
+        self._say(
+            self.s.get_sentence(
+                "weather",
+                '{}_{}'.format(
+                    self.LANG,
+                    self.LOCALE)),
+            lang=self.LANG)
 
         time.sleep(5)
