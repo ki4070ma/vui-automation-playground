@@ -23,5 +23,4 @@ class SentenceLoader(object):
         return self.sentences_json[name][locale]["content"]
 
     def get_response(self, name, locale):
-        print(self.sentences_json)
         return self.sentences_json[name][locale]["res"]
