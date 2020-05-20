@@ -16,14 +16,12 @@
 
 ```bash
 $pip install -r requirements.txt
-$sudo apt install mpg321 espeak
 ```
 
 ### Mac
 
 ```bash
 $pip install -r requirements_mac.txt
-$brew install mpg321
 ```
 
 ## Execute script
