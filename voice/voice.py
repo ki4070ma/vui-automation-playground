@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 import os
-import subprocess as sp
 
 import pyttsx3
 from gtts import gTTS
+from playsound import playsound
 
 DIR = 'files'
 AUDIO_DIR = os.path.join(DIR, 'audio')
@@ -45,7 +45,7 @@ class Voice(object):
     def _play_audio_file(self, file):
         if not os.path.exists(file):
             raise FileExistsError("{} doesn't exist.".format(file))
-        sp.run(['mpg321', file], stdout=sp.DEVNULL, stderr=sp.DEVNULL)
+        playsound(file)
 
 
 if __name__ == '__main__':
