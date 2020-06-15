@@ -1,2 +1,2 @@
-pyobjc == 6.2
+pyobjc == 6.2.1
 -r requirements.txt
